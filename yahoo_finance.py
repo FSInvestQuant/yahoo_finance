@@ -17,7 +17,10 @@ import re
 import time
 import threading
 import datetime
-import requests
+try:
+    import requests
+except ImportError:
+    from botocore.vendored import requests
 import warnings
 import functools
 
