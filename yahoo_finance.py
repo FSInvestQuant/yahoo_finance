@@ -11,7 +11,7 @@ from __future__ import division
 try:
     from cStringIO import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 import re
 import time
@@ -98,8 +98,10 @@ def get_cookie_and_crumb(symbol):
             crumb = re.findall(pattern, raw)[0].split('"')[-2]
         except IndexError:
             with open("debug.html", "wb") as fp: fp.write(raw.encode("utf8", "?"))
-            raise RuntimeError, "Could not find crumb store. Does the symbol exist?" \
-            " Please retry or consider updating crumb pattern."
+            raise RuntimeError(
+                "Could not find crumb store. Does the symbol exist?"
+                " Please retry or consider updating crumb pattern."
+                )
 
 
         # knwon unusal crumb values
@@ -218,6 +220,6 @@ if __name__ == "__main__":
     "MUV2.DE", "BMW.DE", "TKA.DE", "SIE.DE", "MRK.DE",
     "EOAN.F", "LHA.DE", "CBK.DE", "HEN3.DE", "PSM.DE", "RWE.DE"
     ]
-    print download_quotes(dax)
+    print(download_quotes(dax))
     #print download_dividends(dax) # bug!!
     #print download_splits(dax) # bug!!
